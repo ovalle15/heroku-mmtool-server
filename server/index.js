@@ -20,10 +20,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 if (process.env.NODE_ENV === 'production'){
     console.log("env ======>", process.env.NODE_ENV)
 
-    console.log("/api ===> ", routerTable)
     app.use('/api', routerTable);
 
-    console.log("/api ===> ", hisRouter)
     app.use('/api', hisRouter)
     // Passport middleware
     app.use(passport.initialize());
