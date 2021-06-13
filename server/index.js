@@ -9,7 +9,7 @@ const userRouter = require('./routes/users-router')
 const passport = require("passport");
 
 const app = express();
-const apiPort = process.env.PORT || 5000;
+const apiPort = process.env.PORT || 5001;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
