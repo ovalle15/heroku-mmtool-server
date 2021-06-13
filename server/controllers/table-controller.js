@@ -28,7 +28,7 @@ getItems =  async(req, res) => {
             .status(200)
             .json({
                 success: true,
-                item: items[0],
+                item: items,
             });
     }).catch(err => {
         console.error(`caught error in 'getItemsById': ${err}`);
