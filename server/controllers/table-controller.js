@@ -24,31 +24,16 @@ getItems =  async(req, res) => {
         }
         console.log(`200 in 'getItems': Items fetched!`);
 
-        return res.format({
-
-            "application/json": () => {
-              res.json({
-                  succes: true,
-                  items: items
-              });
-            },
-
-            "application/xml": () => {
-              const zipXml = `
-              <?xml version="1.0"?>
-              ${items.map((c) => `
-            <items>
-                <itemId> </itemId>
-                <title></title>
-                <createdDate></createdDate>
-                <updatedDate></updatedDate>
-            </items>
-                `)}
-              `;
-              res.type("application/xml");
-              res.send(zipXml);
-            }
-        })
+        return res
+            .status(200)
+            .json({
+                success: true,
+                item: items[0],
+            });
+    }).catch(err => {
+        console.error(`caught error in 'getItemsById': ${err}`);
+        console.error(err);
+        return err;
     });
 };
 getItemsById = async(req, res) => {
