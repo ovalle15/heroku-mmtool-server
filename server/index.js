@@ -17,19 +17,25 @@ app.use(bodyParser.json());
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
-app.use('/api', routerTable);
-app.use('/api', hisRouter)
+
+
 // Passport middleware
-app.use(passport.initialize());
-// Passport config
-require("./config/passport")(passport);
-// Routes
-app.use('/api', userRouter);
 
+// Routes
+
+
+if (process.env.NODE_ENV === 'production'){
+    console.log("env ======>", process.env.NODE_ENV)
+    app.use('/api', userRouter);
+    app.use('/api', routerTable);
+    app.use('/api', hisRouter)
+    require("./config/passport")(passport);
+    app.use(passport.initialize());
+    app.get('/', (req, res) => {
+        res.send('Hello World!');
+    });
+}
 app.listen(apiPort, () => {
     console.log(` ====== Server running on port ====> ${apiPort}`);
 });
