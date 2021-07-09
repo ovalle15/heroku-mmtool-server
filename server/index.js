@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production'){
     console.log("env ======>", process.env.NODE_ENV)
 
     app.use(express.static('client-side/build') , (req, res, next) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://management-mern-app.herokuapp.com')
+        res.setHeader('Access-Control-Allow-Origin', '*')
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         next();
       });
