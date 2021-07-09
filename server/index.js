@@ -21,7 +21,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 if (process.env.NODE_ENV === 'production'){
     console.log("env ======>", process.env.NODE_ENV)
 
-    app.use(express.static('client-side/build') , (req, res, next) => {
+    app.use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*')
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         next();
