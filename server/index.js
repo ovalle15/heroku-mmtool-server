@@ -1,3 +1,4 @@
+import proxy from 'http-proxy-middleware';
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -19,6 +20,12 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 if (process.env.NODE_ENV === 'production'){
     console.log("env ======>", process.env.NODE_ENV)
+
+    app.use(express.static('client-side/build') , (req, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://management-mern-app.herokuapp.com')
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        next();
+      });
 
     app.use('/api', routerTable);
 
