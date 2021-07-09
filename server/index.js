@@ -1,4 +1,3 @@
-import proxy from 'http-proxy-middleware';
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -22,9 +21,20 @@ if (process.env.NODE_ENV === 'production'){
     console.log("env ======>", process.env.NODE_ENV)
 
     app.use((req, res, next) => {
-        res.setHeader('Access-Control-Allow-Origin', '*')
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        next();
+        app.use(function (req, res, next) {
+
+            // Website you wish to allow to connect
+            res.setHeader('Access-Control-Allow-Origin', 'https://management-mern-app.herokuapp.com');
+
+            // Request methods you wish to allow
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+            // Request headers you wish to allow
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+            // Pass to next layer of middleware
+            next();
+        });
       });
 
     app.use('/api', routerTable);
