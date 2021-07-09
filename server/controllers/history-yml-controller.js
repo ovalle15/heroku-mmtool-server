@@ -14,7 +14,7 @@ uploadYml = async (req, res) => {
     const fileToInsert = {
         ymlDoc: File
     }
-      
+
     console.log("This is the file To Insert ========> ", fileToInsert.ymlDoc)
     const yml = HistYml(fileToInsert)
     console.log('----------------------- createItem: yml-----------------------')
@@ -25,8 +25,11 @@ uploadYml = async (req, res) => {
         .then((saved) => {
             console.log(saved);
             if (saved) {
-                console.error(`201 in 'createItem': Item created!`);
+                console.log(`201 in 'createItem': Item created!`);
                 return res
+                    .setHeader('Access-Control-Allow-Origin', 'https://management-mern-app.herokuapp.com')
+                    .setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+                    .setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
                     .status(201)
                     .json({
                         success: true,
