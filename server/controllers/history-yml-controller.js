@@ -27,9 +27,6 @@ uploadYml = async (req, res) => {
             if (saved) {
                 console.log(`201 in 'createItem': Item created!`);
                 return res
-                    .setHeader('Access-Control-Allow-Origin', 'https://management-mern-app.herokuapp.com')
-                    .setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-                    .setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
                     .status(201)
                     .json({
                         success: true,
